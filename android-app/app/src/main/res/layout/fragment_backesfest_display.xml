@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/firstLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@+id/secondView"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvBitburger"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/bitburger_beer"
+            android:textSize="20sp" />
+
+        <ProgressBar
+            android:id="@+id/progressBeer1"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:progressBackgroundTint="@android:color/background_light"
+            android:progressTint="@color/colorGreen"
+            android:rotation="270"
+            android:scaleX="2.7" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/secondView"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:id="@+id/thirdLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@+id/secondView"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvKirner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/kirner_beer"
+            android:textSize="20sp" />
+
+        <ProgressBar
+            android:id="@+id/progressBeer2"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:progressBackgroundTint="@android:color/background_light"
+            android:progressTint="@color/colorBlue"
+            android:rotation="270"
+            android:scaleX="2.7" />
+    </LinearLayout>
+</RelativeLayout>

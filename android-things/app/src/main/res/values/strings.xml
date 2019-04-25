@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">android-things</string>
+    <string name="title_activity_fatal__error">FATAL_ERROR</string>
+</resources>

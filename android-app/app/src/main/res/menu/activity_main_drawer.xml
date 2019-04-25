@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_start"
+            android:title="Startseite" />
+        <item
+            android:id="@+id/nav_bf_display"
+            android:icon="@drawable/ic_menu_beer"
+            android:title="Backes-Fest Anzeige" />
+        <item
+            android:id="@+id/nav_ff_display"
+            android:icon="@drawable/ic_menu_beer"
+            android:title="Feuerwehrfest Anzeige" />
+    </group>
+
+    <item android:title="Admin">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_control"
+                    android:icon="@drawable/ic_menu_control"
+                    android:title="Backes-Fest Steuerung" />
+                <item
+                    android:id="@+id/nav_control_feuerwehrfest"
+                    android:icon="@drawable/ic_menu_control"
+                    android:title="Feuerwehrfest Steuerung" />
+                <item
+                    android:id="@+id/nav_debug"
+                    android:icon="@drawable/ic_menu_debug"
+                    android:title="DebugConsole" />
+            </group>
+        </menu>
+    </item>
+</menu>
