@@ -6,12 +6,14 @@ public class BackesNetworkPacket {
     // command
     public static final byte VERSION_OFFSET = 0;
     public static final byte VERSION_V1     = 1;
+    public static final byte VERSION_V2     = 2;
 
     // command
     public static final byte CMD_OFFSET     = 1;
     // BackesFest
     public static final byte CMD_REQUEST_BF_DB = 1;
     public static final byte CMD_PUBLISH_BF_DB = 2;
+    public static final byte CMD_PUBLISH_TEMP  = 3;
 
     // size
     public static final byte SIZE_OFFSET = 2;
@@ -30,3 +32,5 @@ public class BackesNetworkPacket {
     public byte   payloadSize;
     public byte[] payloadData;
 }
+
+
