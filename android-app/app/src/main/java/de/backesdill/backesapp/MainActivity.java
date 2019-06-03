@@ -16,7 +16,7 @@ import de.backesdill.backesapp.Fragments.FControl;
 import de.backesdill.backesapp.Fragments.FControlBackes;
 import de.backesdill.backesapp.Fragments.FDebug;
 import de.backesdill.backesapp.Fragments.FDisplay;
-import de.backesdill.backesapp.Fragments.FDisplayBackesFest;
+import de.backesdill.backesapp.Fragments.FPfingste;
 import de.backesdill.backesapp.Fragments.FStartScreen;
 import de.backesdill.helper.ListStorage;
 import de.backesdill.helper.NetDB;
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         mConsoleOutput = new ListStorage();
-        mConsoleOutput.add("FDisplayBackesFest on ActivityCreated");
+        mConsoleOutput.add("FPfingste on ActivityCreated");
 
         // create the netDB instance so the network module ist up and running
         try {
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity
                 //sScreenTV.setText("Startseite");
                 break;
             case R.id.nav_bf_display:
-                fragmentClass = FDisplayBackesFest.class;
+                fragmentClass = FPfingste.class;
                 break;
             case R.id.nav_ff_display:
                 fragmentClass = FDisplay.class;

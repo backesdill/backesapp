@@ -91,7 +91,7 @@ public class FControlBackes extends Fragment{
     public void onActivityCreated(Bundle savedInstanceStat) {
         super.onActivityCreated(savedInstanceStat);
         mConsoleOutput = new ListStorage();
-        mConsoleOutput.add("FDisplayBackesFest on ActivityCreated");
+        mConsoleOutput.add("FPfingste on ActivityCreated");
     }
 
 
@@ -109,7 +109,7 @@ public class FControlBackes extends Fragment{
         mNetDB.setBackesFestCb(new BackesFestReceiverCallback() {
             @Override
             public void onReceive(BackesFestData bfData) {
-                mConsoleOutput.add("FDisplayBackesFest onReceive()");
+                mConsoleOutput.add("FPfingste onReceive()");
 
                 mBfData.kirner    = bfData.kirner;
                 mBfData.bitburger = bfData.bitburger;
