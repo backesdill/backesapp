@@ -50,13 +50,13 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         mConsoleOutput = new ListStorage();
-        mConsoleOutput.add("FPfingste on ActivityCreated");
+        mConsoleOutput.add(false,"FPfingste on ActivityCreated");
 
         // create the netDB instance so the network module ist up and running
         try {
             NetDB netDB = NetDB.getNetDB();
         } catch (Exception e){
-            mConsoleOutput.add("MainActivity getNetDB() exception " + e);
+            mConsoleOutput.add(true, "MainActivity getNetDB() exception " + e);
         }
 
     }
