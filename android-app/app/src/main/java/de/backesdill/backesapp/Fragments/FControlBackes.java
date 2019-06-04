@@ -91,7 +91,7 @@ public class FControlBackes extends Fragment{
     public void onActivityCreated(Bundle savedInstanceStat) {
         super.onActivityCreated(savedInstanceStat);
         mConsoleOutput = new ListStorage();
-        mConsoleOutput.add("FPfingste on ActivityCreated");
+        mConsoleOutput.add(false,"FControlBackes on ActivityCreated");
     }
 
 
@@ -103,13 +103,13 @@ public class FControlBackes extends Fragment{
         try {
             mNetDB = NetDB.getNetDB();
         } catch (Exception e){
-            mConsoleOutput.add("FControlBackes getNetDB() exception " + e);
+            mConsoleOutput.add(true,"FControlBackes getNetDB() exception " + e);
         }
 
         mNetDB.setBackesFestCb(new BackesFestReceiverCallback() {
             @Override
             public void onReceive(BackesFestData bfData) {
-                mConsoleOutput.add("FPfingste onReceive()");
+                mConsoleOutput.add(false,"FControlBackes onReceive()");
 
                 mBfData.kirner    = bfData.kirner;
                 mBfData.bitburger = bfData.bitburger;
