@@ -29,7 +29,7 @@ public class NetDB {
         mConsoleOutput = new ListStorage();
         mBfData = new BackesFestData();
 
-        mConsoleOutput.add( "NetDB::NetDB() Version: 1.0");
+        mConsoleOutput.add(false, "NetDB::NetDB() Version: 2.0");
 
         // create ReceiverCallback
         mRcvCbNetMod = new ReceiverCallback() {
@@ -74,7 +74,7 @@ public class NetDB {
                     // decode BackesNetworkPacket
                     pkt = receiveBackesNetworkPacket(msgData, msgSize);
 
-                    if ((pkt.version != BackesNetworkPacket.VERSION_V1) ||
+                    if ((pkt.version != BackesNetworkPacket.VERSION_V1) &&
                             (pkt.version != BackesNetworkPacket.VERSION_V2)) {
                         mConsoleOutput.add(false, "NetDB::handleMessage() invalid packet version: " + pkt.version);
                     } else {
@@ -264,13 +264,13 @@ public class NetDB {
         return bfData;
     }
 
-    public void publishTemperatureData(byte[] tempData){
+    public void publishTemperatureData(TemperatureData tempData){
         BackesNetworkPacket pkt = new BackesNetworkPacket();
 
         pkt.version     = BackesNetworkPacket.VERSION_V2;
         pkt.cmd         = BackesNetworkPacket.CMD_PUBLISH_TEMP;
         pkt.payloadSize = TemperatureData.MAX_SIZE;
-        pkt.payloadData = tempData;
+        pkt.payloadData = tempData.temperature.getBytes();;
 
         mConsoleOutput.add(false, "NetDB::send CMD_PUBLISH_TEMP");
 
