@@ -16,6 +16,8 @@ import android.widget.TextView;
 import de.backesdill.backesapp.R;
 import de.backesdill.helper.ListStorage;
 import de.backesdill.helper.NetDB;
+import de.backesdill.helper.TemperatureData;
+import de.backesdill.helper.TemperatureReceiverCallback;
 
 /**
  * Created by Tahl on 30.03.2018.
@@ -30,6 +32,7 @@ public class FPfingste extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private TemperatureData mTempData;
 
 //    private double temperatur = 4.0;
     int blue = 255;
@@ -63,14 +66,58 @@ public class FPfingste extends Fragment {
         //       });
         // Ohne hierdas laeuft der Thread nit.
         // Sollte aber fuer die finale Implementation nicht weiter schlimm sein, da man ja den gesendeten Wert bekommt
-        tvAnzeige_Temperatur.setText("22.0°");
-        ExampleThread thread = new ExampleThread();
-        thread.start();
-        // Thread stoppen wenn raus aus fragment
+        //ExampleThread thread = new ExampleThread();
+        //thread.start();
+        tvAnzeige_Temperatur.setText("no data");
     }
 
 
-    class ExampleThread extends Thread {
+    @Override
+    public void onActivityCreated(Bundle savedInstanceStat) {
+        super.onActivityCreated(savedInstanceStat);
+        mConsoleOutput = new ListStorage();
+        mConsoleOutput.add(false, "FPfingste on ActivityCreated");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        mTempData = new TemperatureData();
+        try {
+            mNetDB = NetDB.getNetDB();
+        } catch (Exception e){
+            mConsoleOutput.add(true,"FPfingste getNetDB() exception " + e);
+        }
+
+        mNetDB.setTemperatureCb(new TemperatureReceiverCallback() {
+            @Override
+            public void onReceive(TemperatureData tempData) {
+                mConsoleOutput.add(false, "FPfingste onReceive()");
+
+                mTempData = tempData;
+
+                updateGui();
+            }
+        });
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        mNetDB.resetBackesFestCb();
+    }
+
+
+    private void updateGui(){
+        mConsoleOutput.add(false, "Temp received: " + mTempData.temperature);
+        float temp = Float.parseFloat(mTempData.temperature);
+        tvAnzeige_Temperatur.setTextColor(Color.rgb((int)(red * (temp / obergrenze)), 0, (int)(blue * (1.0 - (temp / obergrenze)))));
+        tvAnzeige_Temperatur.setText("" + mTempData.temperature + "°");
+    }
+
+    /*class ExampleThread extends Thread {
         double i;
 
         ExampleThread() {
@@ -95,7 +142,7 @@ public class FPfingste extends Fragment {
 
             }
         }
-    }
+    }*/
 
 
 }
