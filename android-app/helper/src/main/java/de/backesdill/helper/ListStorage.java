@@ -20,11 +20,6 @@ public class ListStorage {
     }
 
     // if the informations come as a String
-    public void add(String input) {
-        sStorage.add(input);
-    }
-
-    // if the informations come as a String
     public void add(boolean error, String input) {
         sStorage.add(input);
 
