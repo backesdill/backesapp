@@ -5,12 +5,15 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.os.Handler;
 
 import de.backesdill.helper.BackesFestData;
 import de.backesdill.helper.BackesFestReceiverCallback;
+import de.backesdill.helper.TemperatureData;
+import de.backesdill.helper.TemperatureReceiverCallback;
 import de.backesdill.helper.ListStorage;
 import de.backesdill.helper.NetDB;
 
@@ -119,7 +122,7 @@ public class MainActivity extends Activity {
 
             }
         }, 10000);*/
-/*
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -133,31 +136,33 @@ public class MainActivity extends Activity {
                     callFatalError();
                 }
 
-                if (mNetDB != null) {
-                    mNetDB.setBackesFestCb(new BackesFestReceiverCallback() {
-                        @Override
-                        public void onReceive(BackesFestData bfData) {
-                            mConsoleOutput.add("FDisplayBackesFest onReceive()");
-
-                            mBfData.kirner = bfData.kirner;
-                            mBfData.bitburger = bfData.bitburger;
-
-                            updateGui();
-                        }
-                    });
-                    mBfData = mNetDB.getBackesFestData();
-                }
-                updateGui();
-
+                TemperatureThread thread = new TemperatureThread();
+                thread.start();
             }
-        }, 10000);*/
+        }, 10000);
 
         //gpioDoSomething();
 
-        i2cDoSomething();
-
         mConsoleOutput.add(false,"onStart finished");
 
+    }
+
+    class TemperatureThread extends Thread {
+
+        @Override
+        public void run() {
+
+            while (true) {
+                TemperatureData mTempData = new TemperatureData();
+                mTempData.temperature = i2cGetTemperature();
+                mNetDB.publishTemperatureData(mTempData);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     @Override
@@ -259,17 +264,20 @@ public class MainActivity extends Activity {
 
     }
 
-    private void i2cDoSomething(){
+    private String i2cGetTemperature(){
         byte[] buffer = new byte[6];
-
-
+        String retVal;
         try {
             mDevice.read( buffer, 6);
-            mConsoleOutput.add(false, "i2cDoSomething: " + Arrays.toString(buffer));
-            mConsoleOutput.add(false, "i2cDoSomething: " + new String(buffer));
+            retVal = new String(buffer);
+            //mConsoleOutput.add(false, "i2cDoSomething: " + Arrays.toString(buffer));
+            mConsoleOutput.add(false, "i2cGetTemperature: " + new String(buffer));
         } catch (IOException e) {
-            mConsoleOutput.add(false, "i2cDoSomething: Unable to read. " + e);
+            mConsoleOutput.add(false, "i2cGetTemperature: Unable to read. " + e);
+            retVal = "Error";
         }
+
+        return retVal;
     }
 
 
